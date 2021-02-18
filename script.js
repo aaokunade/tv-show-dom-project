@@ -28,22 +28,24 @@ displayEpisodes(allEpisodes);
   let inputEl = document.getElementById("input");
   inputEl.addEventListener("input", function(){
     episodesDiv.innerHTML = "";
-    while (matchedSearch.firstChild) {
-      matchedSearch.removeChild(matchedSearch.firstChild);    
-    }
+    // while (matchedSearch.firstChild) {
+    //   matchedSearch.removeChild(matchedSearch.firstChild);    
+    // }
 
     let search = inputEl.value.toLowerCase();
+    // let newEpisodeDiv = [];
     let listRemains = allEpisodes.filter(function(episodeList){
           if(episodeList["name"].toLowerCase().includes(search) || episodeList["summary"].toLowerCase().includes(search)){
-          let newList = document.createElement("li");          
-          newList.innerHTML = `${episodeList["name"]}`;
-          matchedSearch.appendChild(newList);
-          // console.log(newList);
-          displayEpisodes(episodeList);
-          
-          // matchedSearch.remove();
-        }
-    })
+                  
+            return episodeList;
+         
+            }
+            
+        })
+          let displayPara = document.getElementById("disp")
+      displayPara.innerHTML = `displaying ${listRemains.length}/${allEpisodes.length}`;
+      console.log (displayPara);
+      displayEpisodes(listRemains);
     
   })
 }
