@@ -43,14 +43,33 @@ displayEpisodes(allEpisodes);
             
         })
           let displayPara = document.getElementById("disp")
-      displayPara.innerHTML = `displaying ${listRemains.length}/${allEpisodes.length}`;
+      displayPara.textContent = `displaying ${listRemains.length}/${allEpisodes.length} episodes`;
       console.log (displayPara);
       displayEpisodes(listRemains);
     
   })
+
+function selectFunc(allEpisodes){
+  const selectElem = document.createElement("select");
+  
+  let searchedEpisode = allEpisodes.forEach(function(episodes){
+    const optionElem = document.createElement("option");
+    optionElem.textContent = `S${String(episodes["season"]).padStart(2, "0")}E${String(episodes["number"]).padStart(2, "0")} - ${episodes["name"]}`
+    
+    optionElem.onchange = function(){
+      displayEpisodes(episodes);
+    }
+    selectElem.appendChild(optionElem);
+  })  
+  const displayInput = document.getElementById("inputDisplay");
+  displayInput.insertBefore(selectElem, displayInput.firstChild);
+  
+}
+selectFunc(allEpisodes);
 }
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
-  //rootElem.textContent = `Got ${episodeList.length} episode(s)`;
+  // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
 }
 window.onload = setup;
+

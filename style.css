@@ -5,13 +5,15 @@
   gap: 1rem;
   margin-bottom: 1rem;
 }
-.summaryData p{
+
+.summaryData p {
   color: rgb(83, 4, 60);
   margin-right:1rem;
   padding: 0.5rem;
   text-align: justify; 
 }
-.summaryData h3{
+
+.summaryData h3 {
   text-align: center;
   border: 0.2rem solid rgb(128, 0, 128);
   color: rgb(83, 4, 60);
@@ -20,20 +22,22 @@
   padding: 1rem;
   margin-top: 0rem;
 }
-.summaryData{
+
+.summaryData {
   background-color: rgb(239, 166, 248);
   border: 0.2rem solid rgb(128, 0, 128);
   border-radius: 0.5rem;
   margin-top: 1rem;
 }
 
-img{
+img {
   padding: 0.5rem;
 }
 
-#inputDisplay{
+#inputDisplay {
   display: flex;
-  margin-right: 1rem;
-  margin-left: 1rem;
-  /* margin-right: 1rem; */
-}
+  justify-content: space-around;
+  width: 80%;
+ }
+
+ 
