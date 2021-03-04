@@ -1,7 +1,7 @@
 function setup() {
   let allEpisodes = getAllEpisodes();
   
-    makePageForEpisodes(allEpisodes);
+    // makePageForEpisodes(allEpisodes);
     let rootEl = document.getElementById("root");
     let episodesDiv = document.createElement("div");
     episodesDiv.className = "episodesAll";
@@ -23,6 +23,7 @@ function setup() {
         newPara.innerHTML = `${episodes["summary"]}`;        
       });
     }
+
     displayEpisodes(allEpisodes);
 
     let matchedSearch = document.getElementById("matchedList");
@@ -37,7 +38,7 @@ function setup() {
       })
       let displayPara = document.getElementById("disp")
       displayPara.textContent = `displaying ${listRemains.length}/${allEpisodes.length} episodes`;
-      console.log (displayPara);
+      // console.log (displayPara);
       displayEpisodes(listRemains);          
     })
 
@@ -52,6 +53,7 @@ function setup() {
       const displayInput = document.getElementById("inputDisplay");
       displayInput.insertBefore(selectElem, displayInput.firstChild); 
     }
+
     selectFunc(allEpisodes);
 
     function selectedEpisode(){
@@ -63,7 +65,7 @@ function setup() {
       })
     }
     selectedEpisode();
-    
+        
 }
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
