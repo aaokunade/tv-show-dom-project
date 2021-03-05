@@ -9,6 +9,8 @@ inputSearch.placeholder = "your search item here";
 inputSearch.className = "inputSearch";
 inputSearchDiv.insertBefore(inputSearch, inputSearchDiv.lastChild);
 inputSearchDiv.appendChild(inputSearch);
+let backButton = document.createElement("button");
+inputSearchDiv.appendChild(backButton);
 const episodesDiv = document.createElement("div");
 episodesDiv.className = "episodesDiv";
 const displayPara = document.createElement("p");
@@ -17,6 +19,7 @@ inputSearchDiv.appendChild(displayPara);
 
 // // console.log(allShows);
 function getShows(allShows){
+    episodesDiv.innerHTML ="";
     inputSearch.addEventListener("input", episodeInput);
     // implement display of all shows
     function displayShows(shows){
@@ -170,6 +173,10 @@ function getShows(allShows){
              displayPara.textContent = `displaying ${listRemains.length}/${data.length} episodes`; 
           })                          
         };
+       
+        backButton.addEventListener("click", function(e){
+            displayShows(allShows); 
+        })
 }
     
 
