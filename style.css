@@ -1,43 +1,57 @@
-.episodesAll {
-  color: rgb(161, 30, 30);
+body{
+  width:auto;
+  background-color: rgb(212, 239, 243);
+}
+
+.episodesDiv {
+  color: rgb(43, 30, 161);
   display: grid;
-  grid-template-columns: repeat(5,1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem;
+  background-color: rgb(212, 239, 243);
 }
 
-.summaryData p {
-  color: rgb(83, 4, 60);
-  margin-right:1rem;
-  padding: 0.5rem;
-  text-align: justify; 
+.showsDiv {
+  color: rgb(43, 30, 161);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1rem;
+  background-color: rgb(235, 239, 240);
+  margin: auto;
 }
 
-.summaryData h3 {
-  text-align: center;
-  border: 0.2rem solid rgb(128, 0, 128);
-  color: rgb(83, 4, 60);
-  border-radius: 0.5rem;
-  height: 3rem;
+.episodeDiv, .showDiv{
+  border: 0.1rem solid blue;
   padding: 1rem;
-  margin-top: 0rem;
-}
-
-.summaryData {
-  background-color: rgb(239, 166, 248);
-  border: 0.2rem solid rgb(128, 0, 128);
   border-radius: 0.5rem;
-  margin-top: 1rem;
 }
 
-img {
-  padding: 0.5rem;
+h3 {
+    border: 0.1rem solid blue;
+    border-radius: 0.2rem;  
+    text-align: center;
 }
-
-#inputDisplay {
+.inputSearchDiv {
   display: flex;
   justify-content: space-around;
-  width: 80%;
+  width: 100%;
+  margin: 1rem;
  }
 
- 
+ .wrapDiv{
+  color: rgb(43, 30, 161);
+  display: grid;
+  grid-template-columns: 1fr 4fr 2fr;
+  gap: 1rem;
+  margin: 1rem;
+  background-color: rgb(212, 239, 243);
+ }
+
+ .showDescription{
+     height: 60%;
+     width: 60%;
+  box-shadow: 0.5rem 0.5rem 0.5rem #5477ec;
+  border-radius: 0.2rem;
+ }
