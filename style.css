@@ -32,12 +32,18 @@ h3 {
     border: 0.1rem solid blue;
     border-radius: 0.2rem;  
     text-align: center;
+    background-color: cornflowerblue;
 }
 .inputSearchDiv {
   display: flex;
   justify-content: space-around;
   width: 100%;
   margin: 1rem;
+ }
+
+ a {
+   color: crimson;
+   padding-top: 1rem;
  }
 
  .wrapDiv{
