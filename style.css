@@ -1,5 +1,5 @@
-body{
-  width:auto;
+body {
+  width: auto;
   background-color: rgb(212, 239, 243);
 }
 
@@ -22,36 +22,43 @@ body{
   margin: auto;
 }
 
-.episodeDiv, .showDiv{
+.episodeDiv,
+.showDiv {
   border: 0.1rem solid blue;
   padding: 1rem;
   border-radius: 0.5rem;
 }
 
 h3 {
-    border: 0.1rem solid blue;
-    border-radius: 0.2rem;  
-    text-align: center;
+  border: 0.1rem solid blue;
+  border-radius: 0.2rem;
+  text-align: center;
+  background-color: cornflowerblue;
 }
 .inputSearchDiv {
   display: flex;
   justify-content: space-around;
   width: 100%;
   margin: 1rem;
- }
+}
 
- .wrapDiv{
+a {
+  color: crimson;
+  padding-top: 1rem;
+}
+
+.wrapDiv {
   color: rgb(43, 30, 161);
   display: grid;
   grid-template-columns: 1fr 4fr 2fr;
   gap: 1rem;
   margin: 1rem;
   background-color: rgb(212, 239, 243);
- }
+}
 
- .showDescription{
-     height: 60%;
-     width: 60%;
+.showDescription {
+  height: 60%;
+  width: 60%;
   box-shadow: 0.5rem 0.5rem 0.5rem #5477ec;
   border-radius: 0.2rem;
- }
+}
