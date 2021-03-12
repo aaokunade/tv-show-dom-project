@@ -1,7 +1,5 @@
-
 body {
   width: auto;
-
   background-color: rgb(212, 239, 243);
 }
 
@@ -24,29 +22,24 @@ body {
   margin: auto;
 }
 
-
 .episodeDiv,
 .showDiv {
-
   border: 0.1rem solid blue;
   padding: 1rem;
   border-radius: 0.5rem;
 }
 
 h3 {
-
   border: 0.1rem solid blue;
   border-radius: 0.2rem;
   text-align: center;
   background-color: cornflowerblue;
-
 }
 .inputSearchDiv {
   display: flex;
   justify-content: space-around;
   width: 100%;
   margin: 1rem;
-
 }
 
 a {
@@ -69,4 +62,3 @@ a {
   box-shadow: 0.5rem 0.5rem 0.5rem #5477ec;
   border-radius: 0.2rem;
 }
-
