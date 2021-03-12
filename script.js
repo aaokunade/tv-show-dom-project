@@ -1,11 +1,24 @@
 const allShows = getAllShows();
+// sorts all shows in alphabetical order.
+allShows.sort((a, b) => {
+    if (a.name.toLowerCase() > b.name.toLowerCase()) {
+      return 1;
+    } else if (b.name.toLowerCase() > a.name.toLowerCase()) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
 const displayDiv = document.querySelector("#displayDiv");
 const showsDiv = document.createElement("div");
 showsDiv.className = "showsDiv";
 const inputSearchDiv = document.querySelector("#inputSearch");
 inputSearchDiv.className = "inputSearchDiv";
 const inputSearch = document.createElement("input");
-inputSearch.placeholder = "your search item here";
+const showInputSearch = document.createElement("input");
+showInputSearch.placeholder = "your shows search here";
+inputSearchDiv.appendChild(showInputSearch);
+inputSearch.placeholder = "your episodes search here";
 inputSearch.className = "inputSearch";
 inputSearchDiv.insertBefore(inputSearch, inputSearchDiv.lastChild);
 inputSearchDiv.appendChild(inputSearch);
@@ -16,12 +29,15 @@ const episodesDiv = document.createElement("div");
 episodesDiv.className = "episodesDiv";
 const displayPara = document.createElement("p");
 inputSearchDiv.appendChild(displayPara);
+const showDisplayPara = document.createElement("p");
+inputSearchDiv.appendChild(showDisplayPara);
 
 
-// // console.log(allShows);
+
 function getShows(allShows){
     
     inputSearch.addEventListener("input", episodeInput);
+    showInputSearch.addEventListener("input", showInput);
     // implement display of all shows
     function displayShows(shows){
         episodesDiv.innerHTML ="";
@@ -30,6 +46,11 @@ function getShows(allShows){
             showDiv.className = "showDiv";
             const showHeader = document.createElement("h3");
             showHeader.innerHTML = show["name"];
+            showHeader.addEventListener("click", (event)=>{
+                showChange(show["id"]);
+                const selectShow = document.getElementById("selectShow");
+                selectShow.value = show["id"];
+            });
             const wrapDiv = document.createElement("div");
             wrapDiv.className = "wrapDiv";
             const showImg = document.createElement("img");
@@ -60,11 +81,17 @@ function getShows(allShows){
             showsDiv.appendChild(showDiv);
         })
         displayDiv.appendChild(showsDiv);
+        showDisplayPara.style.display = "inline";
+        backButton.style.display = "none";
     };
 
         // create select element for shows
         const selectShow = document.createElement("select"); 
-        function selectShowFunc(shows){       
+        selectShow.id = "selectShow";
+        selectShow.addEventListener("change", (event)=>{
+            showChange(event.target.value);
+        });
+        function selectShowFunc(shows){  
             shows.forEach(function(show){
             const optionElem = document.createElement("option");
             optionElem.textContent = show["name"];
@@ -75,19 +102,13 @@ function getShows(allShows){
       inputSearchDiv.insertBefore(selectShow, inputSearchDiv.firstChild); 
     };
     
-        // takes in a showID and return the corresponding array of episodes objects
-        // const fetchEpisodes = async function(showID){
-        //     const response = await fetch(`https://api.tvmaze.com/shows/${showID}/episodes`);
-        //     const data = await response.json();
-        //     return data;
-        // };
-
+        // takes in a showID and return the corresponding array of episodes object
         const fetchEpisodesPromise = function(showID){
          return fetch(`https://api.tvmaze.com/shows/${showID}/episodes`)
          .then(response => response.json())       
         };
-    // create select element for episodes
-    
+
+    // create select element for episodes    
     function selectEpisode(episodes){
         selectEpisodeEl.textContent = "";
         const docFrag = document.createDocumentFragment();
@@ -104,26 +125,56 @@ function getShows(allShows){
     selectShowFunc(allShows);
     
     // fetch episodes and display in select input element
+    // creates select elem for episodes
     const selectEpisodeEl = document.createElement("select"); 
     selectEpisodeEl.id = "episodeSel";
     inputSearchDiv.appendChild(selectEpisodeEl); 
 
+        // loads the page to display shows on first load
     const showID = selectShow.value;
+    selectEpisodeEl.style.display = "none";
+    inputSearch.style.display = "none";
+    displayPara.style.display = "none";
+    showDisplayPara.style.display = "inline";
     fetchEpisodesPromise(showID)
     .then(function(data) {
         selectEpisode(data);
     });
-    // const episode = await fetchEpisodes(showID)
 
-    // display corresponding episodes in select episode element for selected show
-    selectShow.addEventListener("change", function(event){
-        const showID = event.target.value; 
+
+    function showChange(showID){
+        // const showID = event.target.value; 
         fetchEpisodesPromise(showID)
         .then(function(data) {
             selectEpisode(data);
             displayEpisodes(data);
+            selectEpisodeEl.style.display = "inline";
+            inputSearch.style.display = "inline";
+            displayPara.style.display = "inline";
+            backButton.style.display = "inline";
+            selectShow.style.display = "none";
+            showInputSearch.style.display = "none";
+            showDisplayPara.style.display = "none";
         });
-    });
+    }
+
+    
+    let showRemains;
+    function showInput(event){
+        showsDiv.textContent = "";
+        let search = event.target.value;
+                  showRemains =  allShows.filter(function(showFiltered){
+                  if(showFiltered["name"].toLowerCase().includes(search) || showFiltered["summary"].toLowerCase().includes(search) || showFiltered["genres"].join(" ").toLowerCase().includes(parseFloat(search))){
+                      return showFiltered;  
+                      console.log(showFiltered);          
+                  }
+           })        
+           displayShows(showRemains);        
+           showDisplayPara.textContent = `displaying ${showRemains.length}/${allShows.length} shows`;                 
+      };
+    
+        
+
 
     // display corresponding episodes in the browser
         function displayEpisodes(episodes){
@@ -162,7 +213,7 @@ function getShows(allShows){
       let listRemains;
       function episodeInput(event){
           episodesDiv.textContent = "";
-          const search = inputSearch.value.toLowerCase();
+          const search = event.target.value;
           const showID = selectShow.value;
              fetchEpisodesPromise(showID)
              .then(function(data){
@@ -175,12 +226,23 @@ function getShows(allShows){
              displayPara.textContent = `displaying ${listRemains.length}/${data.length} episodes`; 
           })                          
         };
+
+
        
         backButton.addEventListener("click", backBtn)
         function backBtn() {
             displayShows(allShows); 
+            showInputSearch.innerText = "";
+            selectEpisodeEl.style.display = "none";
+            inputSearch.style.display = "none";            
+            const selectShow = document.getElementById("selectShow");
+            selectShow.selectedIndex = 0;
+            selectShow.style.display = "inline";
+            showInputSearch.style.display = "inline";
+            displayPara.style.display = "none";
+            showDisplayPara.style.display = "none";
         };
-}
+    }
     
 
 // function getAllEpisodes(){
@@ -196,6 +258,7 @@ function getShows(allShows){
 //                 return episodeFiltered;                
 //             }
 //         })    
+
 //         displayPara.textContent = `displaying ${listRemains.length}/${urlData.length} episodes`;
 //         displayEpisodes(listRemains);     
 //     }
