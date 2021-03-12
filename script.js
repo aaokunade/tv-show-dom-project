@@ -243,56 +243,6 @@ function getShows(allShows){
             showDisplayPara.style.display = "none";
         };
     }
-    
-
-// function getAllEpisodes(){
-
-//     let listRemains;
-//     function episodeInput(event){
-//         episodesDiv.textContent = "";
-//         const search = inputSearch.value.toLowerCase();
-//         // console.log(inputSearch.value);
-//            listRemains = urlData.filter(function(episodeFiltered){
-//             if(episodeFiltered["name"].toLowerCase().includes(search) || episodeFiltered["summary"].toLowerCase().includes(search)){
-//                 // console.log(episodeFiltered);
-//                 return episodeFiltered;                
-//             }
-//         })    
-
-//         displayPara.textContent = `displaying ${listRemains.length}/${urlData.length} episodes`;
-//         displayEpisodes(listRemains);     
-//     }
-
-
-
-//     function selectedEpisode(){
-//         selectEpisode.addEventListener("change", function(event){
-//          let chosenOpt = event.target.value;
-//             const elemID = chosenOpt.split("-")[0];
-//             const chosenEpisode = document.querySelector(`#${elemID}`);
-//             chosenEpisode.scrollIntoView({ block: 'end', behavior: 'smooth' })
-//         })
-//       };
-
-//       selectedEpisode();
-    
-
-//     let urlData;
-
-//     fetch("https://api.tvmaze.com/shows/82/episodes")
-//         .then(function(response){
-//             return response.json();
-//         })
-
-//         .then(function(data){
-//             urlData = data;
-//             selectEpisodeFunc(urlData);
-//             selectedEpisode(urlData);
-//             return displayEpisodes(urlData);
-//         })
-// }
-
-// getAllEpisodes();
 getShows(allShows);
 
 
