@@ -7,11 +7,10 @@ inputSearchDiv.className = "inputSearchDiv";
 const inputSearch = document.createElement("input");
 inputSearch.placeholder = "your search item here";
 inputSearch.className = "inputSearch";
-const backButton = document.createElement("button");
-backButton.textContent = "Back to All Shows";
-inputSearchDiv.appendChild(backButton);
 inputSearchDiv.insertBefore(inputSearch, inputSearchDiv.lastChild);
 inputSearchDiv.appendChild(inputSearch);
+let backButton = document.createElement("button");
+inputSearchDiv.appendChild(backButton);
 const episodesDiv = document.createElement("div");
 episodesDiv.className = "episodesDiv";
 const displayPara = document.createElement("p");
@@ -68,6 +67,7 @@ function getShows(allShows) {
       optionElem.value = show["id"];
       selectShow.appendChild(optionElem);
     });
+<<<<<<< HEAD
     inputSearchDiv.appendChild(selectShow);
     inputSearchDiv.insertBefore(selectShow, inputSearchDiv.firstChild);
   }
@@ -180,6 +180,63 @@ function getShows(allShows) {
     console.log(allShows);
   }
   backBtn();
+=======
+
+    // display corresponding episodes in the browser
+        function displayEpisodes(episodes){
+            episodesDiv.textContent = "";
+            episodes.forEach(function(episode){
+                const episodeDiv = document.createElement("div");
+                episodeDiv.className = "episodeDiv";
+                episodeDiv.id = `S${String(episode["season"]).padStart(2, "0")}E${String(episode["number"]).padStart(2, "0")}`;
+                const episodeHeader = document.createElement("h3");
+                episodeHeader.innerHTML = `${episode["name"]} - S${String(episode["season"]).padStart(2, "0") } E${String(episode["number"]).padStart(2, "0")}`
+                episodeDiv.appendChild(episodeHeader );
+                const episodeImg = document.createElement("img");
+                if (episode["image"]){
+                    episodeImg.src = `${episode["image"]["medium"]}`;
+                };
+                episodeDiv.appendChild(episodeImg);
+                const episodePara = document.createElement("p");
+                episodePara.innerHTML = `${episode["summary"]}`;
+                episodeDiv.appendChild(episodePara);
+                episodesDiv.appendChild(episodeDiv);
+            })
+        displayDiv.innerHTML = "";
+        displayDiv.appendChild(episodesDiv);
+    };
+
+    // scroll into view
+        selectEpisodeEl.addEventListener("change", function(event){
+         let chosenOpt = event.target.value;
+            const elemID = chosenOpt.split("-")[0];
+            const chosenEpisode = document.querySelector(`#${elemID}`);
+            chosenEpisode.scrollIntoView({ block: 'end', behavior: 'smooth' })
+        })
+
+
+    //   present the episodes that match the search term
+      let listRemains;
+      function episodeInput(event){
+          episodesDiv.textContent = "";
+          const search = inputSearch.value.toLowerCase();
+          const showID = selectShow.value;
+             fetchEpisodesPromise(showID)
+             .then(function(data){
+               listRemains =  data.filter(function(episodeFiltered){
+                    if(episodeFiltered["name"].toLowerCase().includes(search) || episodeFiltered["summary"].toLowerCase().includes(search)){
+                        return episodeFiltered;            
+                    }
+             })        
+             displayEpisodes(listRemains);        
+             displayPara.textContent = `displaying ${listRemains.length}/${data.length} episodes`; 
+          })                          
+        };
+       
+        backButton.addEventListener("click", function(){
+            displayShows(allShows);
+        })
+>>>>>>> bb8589dca5c7500f1a8436cac1f056923004c982
 }
 
 getShows(allShows);
