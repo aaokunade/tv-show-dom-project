@@ -164,9 +164,8 @@ function getShows(allShows){
         showsDiv.textContent = "";
         let search = event.target.value;
                   showRemains =  allShows.filter(function(showFiltered){
-                  if(showFiltered["name"].toLowerCase().includes(search) || showFiltered["summary"].toLowerCase().includes(search) || showFiltered["genres"].join(" ").toLowerCase().includes(parseFloat(search))){
-                      return showFiltered;  
-                      console.log(showFiltered);          
+                  if(showFiltered["name"].toLowerCase().includes(search) || showFiltered["summary"].toLowerCase().includes(search) || showFiltered["genres"].join(" ").toLowerCase().includes(search)){
+                      return showFiltered;         
                   }
            })        
            displayShows(showRemains);        
